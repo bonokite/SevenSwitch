@@ -241,12 +241,12 @@ import QuartzCore
         // on/off images
         self.onImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width - self.frame.size.height, height: self.frame.size.height))
         onImageView.alpha = 1.0
-        onImageView.contentMode = UIViewContentMode.center
+        onImageView.contentMode = UIView.ContentMode.center
         backgroundView.addSubview(onImageView)
         
         self.offImageView = UIImageView(frame: CGRect(x: self.frame.size.height, y: 0, width: self.frame.size.width - self.frame.size.height, height: self.frame.size.height))
         offImageView.alpha = 1.0
-        offImageView.contentMode = UIViewContentMode.center
+        offImageView.contentMode = UIView.ContentMode.center
         backgroundView.addSubview(offImageView)
         
         // labels
@@ -277,8 +277,8 @@ import QuartzCore
         
         // thumb image
         self.thumbImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: thumbView.frame.size.width, height: thumbView.frame.size.height))
-        thumbImageView.contentMode = UIViewContentMode.center
-        thumbImageView.autoresizingMask = UIViewAutoresizing.flexibleWidth
+        thumbImageView.contentMode = UIView.ContentMode.center
+        thumbImageView.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
         thumbView.addSubview(thumbImageView)
     
         self.on = false
@@ -293,7 +293,7 @@ import QuartzCore
         let activeKnobWidth = self.bounds.size.height - 2 + 5
         isAnimating = true
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [UIViewAnimationOptions.curveEaseOut, UIViewAnimationOptions.beginFromCurrentState], animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [UIView.AnimationOptions.curveEaseOut, UIView.AnimationOptions.beginFromCurrentState], animations: {
                 if self.on {
                     self.thumbView.frame = CGRect(x: self.bounds.size.width - (activeKnobWidth + 1), y: self.thumbView.frame.origin.y, width: activeKnobWidth, height: self.thumbView.frame.size.height)
                     self.backgroundView.backgroundColor = self.onTintColor
@@ -355,7 +355,7 @@ import QuartzCore
         }
         
         if previousValue != self.on {
-            self.sendActions(for: UIControlEvents.valueChanged)
+            self.sendActions(for: UIControl.Event.valueChanged)
         }
     }
     
@@ -430,12 +430,12 @@ import QuartzCore
     *   update the looks of the switch to be in the on position
     *   optionally make it animated
     */
-    fileprivate func showOn(_ animated: Bool) {
+    @objc fileprivate func showOn(_ animated: Bool) {
         let normalKnobWidth = self.bounds.size.height - 2
         let activeKnobWidth = normalKnobWidth + 5
         if animated {
             isAnimating = true
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: [UIViewAnimationOptions.curveEaseOut, UIViewAnimationOptions.beginFromCurrentState], animations: {
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: [UIView.AnimationOptions.curveEaseOut, UIView.AnimationOptions.beginFromCurrentState], animations: {
                 if self.isTracking {
                     self.thumbView.frame = CGRect(x: self.bounds.size.width - (activeKnobWidth + 1), y: self.thumbView.frame.origin.y, width: activeKnobWidth, height: self.thumbView.frame.size.height)
                 }
@@ -485,13 +485,13 @@ import QuartzCore
     *   update the looks of the switch to be in the off position
     *   optionally make it animated
     */
-    fileprivate func showOff(_ animated: Bool) {
+    @objc fileprivate func showOff(_ animated: Bool) {
         let normalKnobWidth = self.bounds.size.height - 2
         let activeKnobWidth = normalKnobWidth + 5
         
         if animated {
             isAnimating = true
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: [UIViewAnimationOptions.curveEaseOut, UIViewAnimationOptions.beginFromCurrentState], animations: {
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: [UIView.AnimationOptions.curveEaseOut, UIView.AnimationOptions.beginFromCurrentState], animations: {
                 if self.isTracking {
                     self.thumbView.frame = CGRect(x: 1, y: self.thumbView.frame.origin.y, width: activeKnobWidth, height: self.thumbView.frame.size.height);
                     self.backgroundView.backgroundColor = self.activeColor
